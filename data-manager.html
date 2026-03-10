@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Manager - HR AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f3f4f6; padding: 40px; }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 10px; color: #1f2937; }
+        .subtitle { text-align: center; color: #6b7280; margin-bottom: 40px; }
+        
+        .data-section { background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .data-section h2 { font-size: 1.25rem; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+        .data-section h2 i { color: #6366f1; }
+        
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
+        .stat-box { background: #f9fafb; padding: 20px; border-radius: 8px; text-align: center; }
+        .stat-number { font-size: 2rem; font-weight: 700; color: #6366f1; }
+        .stat-label { color: #6b7280; font-size: 0.875rem; }
+        
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+        th { background: #f9fafb; font-weight: 600; color: #374151; }
+        tr:hover { background: #f9fafb; }
+        
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 8px; font-weight: 500; cursor: pointer; border: none; transition: all 0.2s; }
+        .btn-primary { background: #6366f1; color: white; }
+        .btn-primary:hover { background: #4f46e5; }
+        .btn-success { background: #10b981; color: white; }
+        .btn-success:hover { background: #059669; }
+        .btn-group { display: flex; gap: 12px; flex-wrap: wrap; }
+        
+        .empty { text-align: center; padding: 40px; color: #9ca3af; }
+        .empty i { font-size: 3rem; margin-bottom: 10px; }
+        
+        .instructions { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 20px; margin-top: 20px; }
+        .instructions h3 { color: #1e40af; margin-bottom: 10px; font-size: 1rem; }
+        .instructions ol { padding-left: 20px; color: #1e40af; }
+        .instructions li { margin-bottom: 8px; }
+        
+        .success-msg { background: #d1fae5; color: #065f46; padding: 12px 20px; border-radius: 8px; margin-bottom: 20px; display: none; }
+        .success-msg.show { display: block; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1><i class="fas fa-database"></i> HR AI Data Manager</h1>
+    <p class="subtitle">View and export all user data - Easy Excel Conversion</p>
+    
+    <div class="success-msg" id="successMsg">
+        <i class="fas fa-check-circle"></i> Data exported successfully!
+    </div>
+    
+    <!-- Statistics -->
+    <div class="stats">
+        <div class="stat-box">
+            <div class="stat-number" id="totalUsers">0</div>
+            <div class="stat-label">Total Users</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" id="totalLeads">0</div>
+            <div class="stat-label">Total Leads</div>
+        </div>
+        <div class="stat-box">
+            <div class="stat-number" id="totalData">0</div>
+            <div class="stat-label">Total Records</div>
+        </div>
+    </div>
+    
+    <!-- Users Data -->
+    <div class="data-section">
+        <h2><i class="fas fa-users"></i> Registered Users</h2>
+        <table id="usersTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Company</th>
+                    <th>Signup Date</th>
+                </tr>
+            </thead>
+            <tbody id="usersBody">
+            </tbody>
+        </table>
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="downloadUsersJSON()">
+                <i class="fas fa-download"></i> Download Users JSON
+            </button>
+            <button class="btn btn-success" onclick="downloadUsersExcel()">
+                <i class="fas fa-file-excel"></i> Download Users Excel
+            </button>
+        </div>
+    </div>
+    
+    <!-- Leads Data -->
+    <div class="data-section">
+        <h2><i class="fas fa-address-book"></i> Contact Form Leads</h2>
+        <table id="leadsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Company</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="leadsBody">
+            </tbody>
+        </table>
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="downloadLeadsJSON()">
+                <i class="fas fa-download"></i> Download Leads JSON
+            </button>
+            <button class="btn btn-success" onclick="downloadLeadsExcel()">
+                <i class="fas fa-file-excel"></i> Download Leads Excel
+            </button>
+        </div>
+    </div>
+    
+    <!-- Export All -->
+    <div class="data-section">
+        <h2><i class="fas fa-file-archive"></i> Export All Data</h2>
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="downloadAllJSON()">
+                <i class="fas fa-download"></i> Download All Data (JSON)
+            </button>
+            <button class="btn btn-success" onclick="downloadAllExcel()">
+                <i class="fas fa-file-excel"></i> Download All Data (Excel)
+            </button>
+        </div>
+        
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> How to Convert to Excel/DBMS:</h3>
+            <ol>
+                <li>Click "Download All Data (JSON)" button above</li>
+                <li>Open the downloaded file in Excel or any text editor</li>
+                <li>In Excel: File → Open → Select the JSON file</li>
+                <li>Or use Excel's "From Data" → "From JSON" power query</li>
+                <li>For DBMS: Import JSON as table in MySQL/PostgreSQL/MongoDB</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<!-- SheetJS Library for Excel Export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+    // Get all data from localStorage
+    function getUsers() {
+        return JSON.parse(localStorage.getItem('hr_ai_users') || '[]');
+    }
+    
+    function getLeads() {
+        return JSON.parse(localStorage.getItem('hr_ai_leads') || '[]');
+    }
+    
+    // Load and display data
+    function loadData() {
+        const users = getUsers();
+        const leads = getLeads();
+        
+        // Update stats
+        document.getElementById('totalUsers').textContent = users.length;
+        document.getElementById('totalLeads').textContent = leads.length;
+        document.getElementById('totalData').textContent = users.length + leads.length;
+        
+        // Display users
+        const usersBody = document.getElementById('usersBody');
+        if (users.length === 0) {
+            usersBody.innerHTML = '<tr><td colspan="5" class="empty"><i class="fas fa-users"></i><br>No users yet. Sign up at signup.html</td></tr>';
+        } else {
+            usersBody.innerHTML = users.map(u => '<tr><td>' + u.id + '</td><td>' + u.name + '</td><td>' + u.email + '</td><td>' + u.company + '</td><td>' + new Date(u.date).toLocaleString() + '</td></tr>').join('');
+        }
+        
+        // Display leads
+        const leadsBody = document.getElementById('leadsBody');
+        if (leads.length === 0) {
+            leadsBody.innerHTML = '<tr><td colspan="6" class="empty"><i class="fas fa-address-book"></i><br>No leads yet. Submit contact form at contact.html</td></tr>';
+        } else {
+            leadsBody.innerHTML = leads.map(l => '<tr><td>' + l.id + '</td><td>' + (l.name || 'N/A') + '</td><td>' + (l.email || 'N/A') + '</td><td>' + (l.company || 'N/A') + '</td><td>' + (l.message ? l.message.substring(0, 30) + '...' : 'N/A') + '</td><td>' + new Date(l.date).toLocaleString() + '</td></tr>').join('');
+        }
+    }
+    
+    // Download functions
+    function downloadJSON(data, filename) {
+        const json = JSON.stringify(data, null, 2);
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        showSuccess();
+    }
+    
+    function downloadExcel(data, sheetName, filename) {
+        const ws = XLSX.utils.json_to_sheet(data);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, sheetName);
+        XLSX.writeFile(wb, filename);
+        showSuccess();
+    }
+    
+    function showSuccess() {
+        document.getElementById('successMsg').classList.add('show');
+        setTimeout(() => document.getElementById('successMsg').classList.remove('show'), 3000);
+    }
+    
+    // Export Users
+    function downloadUsersJSON() {
+        const users = getUsers();
+        downloadJSON({ users: users, exportDate: new Date().toISOString() }, 'hr_ai_users.json');
+    }
+    
+    function downloadUsersExcel() {
+        const users = getUsers().map(u => ({
+            ID: u.id,
+            Name: u.name,
+            Email: u.email,
+            Company: u.company,
+            'Signup Date': new Date(u.date).toLocaleString()
+        }));
+        downloadExcel(users, 'Users', 'HR_AI_Users.xlsx');
+    }
+    
+    // Export Leads
+    function downloadLeadsJSON() {
+        const leads = getLeads();
+        downloadJSON({ leads: leads, exportDate: new Date().toISOString() }, 'hr_ai_leads.json');
+    }
+    
+    function downloadLeadsExcel() {
+        const leads = getLeads().map(l => ({
+            ID: l.id,
+            Name: l.name || '',
+            Email: l.email || '',
+            Company: l.company || '',
+            Message: l.message || '',
+            Date: new Date(l.date).toLocaleString(),
+            Status: l.status || 'new'
+        }));
+        downloadExcel(leads, 'Leads', 'HR_AI_Leads.xlsx');
+    }
+    
+    // Export All
+    function downloadAllJSON() {
+        const data = {
+            exportDate: new Date().toISOString(),
+            users: getUsers(),
+            leads: getLeads()
+        };
+        downloadJSON(data, 'HR_AI_All_Data.json');
+    }
+    
+    function downloadAllExcel() {
+        const users = getUsers().map(u => ({
+            Type: 'User',
+            ID: u.id,
+            Name: u.name,
+            Email: u.email,
+            Company: u.company,
+            Date: new Date(u.date).toLocaleString()
+        }));
+        
+        const leads = getLeads().map(l => ({
+            Type: 'Lead',
+            ID: l.id,
+            Name: l.name || '',
+            Email: l.email || '',
+            Company: l.company || '',
+            Message: l.message || '',
+            Date: new Date(l.date).toLocaleString(),
+            Status: l.status || 'new'
+        }));
+        
+        const allData = [...users, ...leads];
+        downloadExcel(allData, 'All Data', 'HR_AI_Complete_Data.xlsx');
+    }
+    
+    // Initialize
+    loadData();
+</script>
+
+</body>
+</html>
+

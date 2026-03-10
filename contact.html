@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Riyank</title>
+    <meta name="description" content="Contact Riyank for government services assistance. We're here to help with passport, driving license, PAN card, visa, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .contact-hero { 
+            padding: 120px 0 60px; 
+            background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); 
+            text-align: center; 
+        }
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+        .contact-info-card {
+            background: var(--white);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition-normal);
+        }
+        .contact-info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .contact-info-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+        }
+        .contact-info-card h4 {
+            margin-bottom: 8px;
+        }
+        .contact-info-card p {
+            margin: 0;
+            color: var(--gray-color);
+        }
+        .form-container {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+        .form-group {
+            margin-bottom: 24px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark-color);
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 2px solid var(--gray-lighter);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: var(--transition-fast);
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .required-field::after {
+            content: ' *';
+            color: #EF4444;
+        }
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            margin-top: 16px;
+        }
+        .whatsapp-btn:hover {
+            background: #128C7E;
+        }
+        @media (max-width: 768px) {
+            .contact-info-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .form-container {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <a href="index.html" class="logo"><i class="fas fa-file-signature"></i><span>Riyank</span></a>
+        <ul class="nav-menu">
+            <li><a href="index.html#services" class="nav-link">Services</a></li>
+            <li><a href="index.html#process" class="nav-link">Process</a></li>
+            <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="contact.html" class="btn btn-primary btn-sm">Get Started</a>
+        </div>
+    </div>
+</nav>
+
+<section class="contact-hero">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p style="font-size: 1.25rem; color: var(--gray-color);">Have questions? We're here to help! Fill the form below or call us directly.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <!-- Contact Info Cards -->
+        <div class="contact-info-grid">
+            <div class="contact-info-card">
+                <i class="fas fa-phone-alt"></i>
+                <h4>Call Us</h4>
+                <p>+91 99999 99999</p>
+                <p>Mon - Sat: 9AM - 8PM</p>
+            </div>
+            <div class="contact-info-card">
+                <i class="fab fa-whatsapp"></i>
+                <h4>WhatsApp</h4>
+                <p>+91 99999 99999</p>
+                <p>Quick chat on WhatsApp</p>
+            </div>
+            <div class="contact-info-card">
+                <i class="fas fa-envelope"></i>
+                <h4>Email Us</h4>
+                <p>info@riyank.com</p>
+                <p>We reply within 24 hours</p>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="form-container">
+            <h2 style="text-align: center; margin-bottom: 8px;">Send us a Message</h2>
+            <p style="text-align: center; color: var(--gray-color); margin-bottom: 32px;">Fill in your details and we'll get back to you shortly!</p>
+            <form id="contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" class="required-field">Full Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="required-field">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email (optional)">
+                    </div>
+                    <div class="form-group">
+                        <label for="service" class="required-field">Service Required</label>
+                        <select id="service" name="service" required>
+                            <option value="">Select a service</option>
+                            <option value="Passport">Passport Services</option>
+                            <option value="Driving License">Driving License</option>
+                            <option value="PAN Card">PAN Card Services</option>
+                            <option value="Visa">Visa Services</option>
+                            <option value="Aadhaar">Aadhaar Services</option>
+                            <option value="Voter ID">Voter ID Services</option>
+                            <option value="Birth Certificate">Birth Certificate</option>
+                            <option value="Marriage Certificate">Marriage Certificate</option>
+                            <option value="Other">Other Services</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message" class="required-field">Message / Query</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Describe your requirements - e.g., I need a new passport, currently have valid passport but it's expiring soon..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Submit Request
+                </button>
+                
+                <div style="text-align: center;">
+                    <a href="https://wa.me/919999999999" class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Or chat on WhatsApp
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="index.html" class="logo"><i class="fas fa-file-signature"></i><span>Riyank</span></a>
+                <p>Your trusted partner for government and social services.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h5>Services</h5>
+                <ul>
+                    <li><a href="index.html#services">Passport</a></li>
+                    <li><a href="index.html#services">Driving License</a></li>
+                    <li><a href="index.html#services">PAN Card</a></li>
+                    <li><a href="index.html#services">Visa</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h5>Quick Links</h5>
+                <ul>
+                    <li><a href="index.html#process">How It Works</a></li>
+                    <li><a href="index.html#faq">FAQ</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h5>Contact</h5>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +91 99999 99999</li>
+                    <li><i class="fas fa-envelope"></i> info@riyank.com</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Riyank. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+    // Pre-select service from URL parameter
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const service = urlParams.get('service');
+        if (service) {
+            const select = document.getElementById('service');
+            if (select) {
+                // Convert service slug to proper format
+                let formattedService = service.charAt(0).toUpperCase() + service.slice(1).replace(/-/g, ' ');
+                
+                // Map common service names
+                const serviceMap = {
+                    'passport': 'Passport',
+                    'driving license': 'Driving License',
+                    'pan card': 'PAN Card',
+                    'pan': 'PAN Card',
+                    'visa': 'Visa',
+                    'aadhaar': 'Aadhaar',
+                    'voter id': 'Voter ID',
+                    'certificate': 'Birth Certificate'
+                };
+                
+                if (serviceMap[formattedService.toLowerCase()]) {
+                    formattedService = serviceMap[formattedService.toLowerCase()];
+                }
+                
+                select.value = formattedService;
+            }
+        }
+    });
+</script>
+</body>
+</html>
+
